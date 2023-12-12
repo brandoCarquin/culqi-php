@@ -9,7 +9,7 @@ namespace Culqi;
  */
 class Plans extends Resource {
 
-    const URL_PLANS = "/plans/";
+    const URL_PLANS = "/recurrent/plans/";
 
     /**
      * @param array|null $options
@@ -26,7 +26,8 @@ class Plans extends Resource {
      * @return create Plan response.
      */
     public function create($options = NULL, $encryption_params=[]) {
-        return $this->request("POST", self::URL_PLANS, $api_key = $this->culqi->api_key, $options, false, $encryption_params);
+        define('PATH', "create");
+        return $this->request("POST", self::URL_PLANS . PATH, $api_key = $this->culqi->api_key, $options, false, $encryption_params);
     }
 
     /**

@@ -81,13 +81,20 @@ class Test extends PHPUnit_Framework_TestCase {
   public function createPlan() {
     $plan = $this->culqi->Plans->create(
       array(
-        "amount" => 10000,
-        "currency_code" => "PEN",
-        "interval" => "dias",
-        "interval_count" => 1,
-        "limit" => 12,
-        "name" => "plan-culqi".uniqid(),
-        "trial_days" => 15
+        "interval_unit_time" => 3,
+        "interval_count" => 0,
+        "amount" => 350,
+        "name" => "Plan mensual" . uniqid(),
+        "description" => "Plan-description" . uniqid(),
+        "short_name" => "pln-" . uniqid(),
+        "currency" => "PEN",
+        "metadata" => json_decode('{}'),
+        "initial_cycles" => array(
+            "count" => 2,
+            "amount" => 0,
+            "has_initial_charge" => false,
+            "interval_unit_time" => 3
+        ),
       )
     );
     return $plan;
@@ -148,13 +155,17 @@ class Test extends PHPUnit_Framework_TestCase {
   }
 
   public function createSubscription() {
-      $subscription = $this->culqi->Subscriptions->create(
-          array(
-              "card_id" => $this->createCard()->id,
-              "plan_id" => $this->createPlan()->id
-          )
-      );
-      return $subscription;
+    $subscription = $this->culqi->Subscriptions->create(
+      array(
+        "card_id" => "crd_live_okkEbY1KTctRkqOO",
+        "plan_id" => "pln_live_NEkeliAcuGTnmRT7",
+        "metadata" => array(
+          "data" => "test"
+        ),
+        "tyc" => true
+      )
+    );
+    return $subscription;
   }
 
   public function testCreateSubscription() {

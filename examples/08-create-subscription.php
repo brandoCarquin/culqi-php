@@ -6,17 +6,21 @@
 
 try {
   // Usando Composer
-  require '../vendor/autoload.php';
+  require 'vendor/autoload.php';
 
   // Configurar tu API Key y autenticación
-  $SECRET_KEY = "{SECRET KEY}";
+  $SECRET_KEY = "sk_live_9e8a2a39c334800a";
   $culqi = new Culqi\Culqi(array('api_key' => $SECRET_KEY));
 
   // Creando Cargo a una tarjeta
   $subscription = $culqi->Subscriptions->create(
     array(
-        "card_id"=> "{card_id}",
-        "plan_id" => "{plan_id}"
+        "card_id"=> "crd_live_okkEbY1KTctRkqOO",
+        "plan_id" => "pln_live_NEkeliAcuGTnmRT7",
+        "metadata" => array(
+          "data" => "test"
+      ),
+        "tyc" => true
     )
   );
 

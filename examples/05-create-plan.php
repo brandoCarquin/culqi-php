@@ -6,24 +6,31 @@
 
 try {
   // Usando Composer (o puedes incluir las dependencias manualmente)
-  require '../vendor/autoload.php';
+  require 'vendor/autoload.php';
 
   // Configurar tu API Key y autenticación
-  $SECRET_KEY = "{SECRET KEY}";
+  $SECRET_KEY = "sk_live_9e8a2a39c334800a";
   $culqi = new Culqi\Culqi(array('api_key' => $SECRET_KEY));
 
   // Creando Cargo a una tarjeta
   $plan = $culqi->Plans->create(
-      array(
-        "amount" => 10000,
-        "currency_code" => "PEN",
-        "interval" => "months",
-        "interval_count" => 1,
-        "limit" => 12,
-        "name" => "Plan de Prueba ".uniqid(),
-        "trial_days" => 15
-      )
-  );
+    array(
+        "interval_unit_time" => 3,
+        "interval_count" => 0,
+        "amount" => 350,
+        "name" => "Plan mensual" . uniqid(),
+        "description" => "Plan-description" . uniqid(),
+        "short_name" => "pln-" . uniqid(),
+        "currency" => "PEN",
+        "metadata" => json_decode('{}'),
+        "initial_cycles" => array(
+            "count" => 2,
+            "amount" => 0,
+            "has_initial_charge" => false,
+            "interval_unit_time" => 3
+        ),
+    )
+);
   // Respuesta
   echo json_encode($plan);
 

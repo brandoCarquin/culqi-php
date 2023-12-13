@@ -9,7 +9,7 @@ namespace Culqi;
  */
 class Subscriptions extends Resource {
 
-    const URL_SUBSCRIPTIONS = "/subscriptions/";
+    const URL_SUBSCRIPTIONS = "/recurrent/subscriptions";
 
     /**
      * @param array|null $options
@@ -26,7 +26,8 @@ class Subscriptions extends Resource {
      * @return create Subscription response.
      */
     public function create($options = NULL, $encryption_params=[]) {
-        return $this->request("POST", self::URL_SUBSCRIPTIONS, $api_key = $this->culqi->api_key, $options, false, $encryption_params);
+        define('PATH', "/create");
+        return $this->request("POST", self::URL_SUBSCRIPTIONS . PATH, $api_key = $this->culqi->api_key, $options, false, $encryption_params);
     }
 
     /**
@@ -54,7 +55,7 @@ class Subscriptions extends Resource {
      * @return update Subscription response.
      */
     public function update($id = NULL, $options = NULL, $encryption_params=[]) {
-        return $this->request("PATCH", self::URL_SUBSCRIPTIONS . $id . "/", $api_key = $this->culqi->api_key, $option, false, $encryption_params);
+        return $this->request("PATCH", self::URL_SUBSCRIPTIONS . $id . "/", $api_key = $this->culqi->api_key, $options, false, $encryption_params);
     }
 
 }
